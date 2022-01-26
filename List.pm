@@ -4,6 +4,7 @@ use strict;
 use warnings;
 
 use Class::Utils qw(set_params);
+use English;
 use Error::Pure qw(err);
 use Getopt::Std;
 use List::MoreUtils qw(uniq);
@@ -57,7 +58,22 @@ sub run {
 
 	my $marc_file = MARC::File::XML->in($self->{'_marc_xml_file'});
 	my $ret_hr = {};
-	while (my $record = $marc_file->next) {
+	my $num = 1;
+	my $previous_record;
+	while (1) {
+		my $record = eval {
+			$marc_file->next;
+		};
+		if ($EVAL_ERROR) {
+			print STDERR "Cannot process '$num' record. ".
+				"Previous record is ".$previous_record->title."\n";
+			print STDERR "Error: $EVAL_ERROR\n";
+			next;
+		}
+		if (! defined $record) {
+			last;
+		}
+		$previous_record = $record;
 		# TODO Multiple values
 		my $field = $record->field($self->{'_marc_field'});
 		if (defined $field) {
@@ -67,6 +83,7 @@ sub run {
 				$ret_hr->{$subfield_value} = $subfield_value;
 			}
 		}
+		$num++;
 	}
 
 	# Print out.
