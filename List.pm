@@ -66,7 +66,7 @@ sub run {
 		};
 		if ($EVAL_ERROR) {
 			print STDERR "Cannot process '$num' record. ".
-				"Previous record is ".$previous_record->title."\n";
+				"Previous record is ".encode_utf8($previous_record->title)."\n";
 			print STDERR "Error: $EVAL_ERROR\n";
 			next;
 		}
