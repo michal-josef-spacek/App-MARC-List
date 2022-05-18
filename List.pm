@@ -74,13 +74,14 @@ sub run {
 			last;
 		}
 		$previous_record = $record;
-		# TODO Multiple values
-		my $field = $record->field($self->{'_marc_field'});
-		if (defined $field) {
-			# TODO Multiple values
-			my $subfield_value = $field->subfield($self->{'_marc_subfield'});
-			if (defined $subfield_value && ! exists $ret_hr->{$subfield_value}) {
-				$ret_hr->{$subfield_value} = $subfield_value;
+
+		my @fields = $record->field($self->{'_marc_field'});
+		foreach my $field (@fields) {
+			my @subfield_values = $field->subfield($self->{'_marc_subfield'});
+			foreach my $subfield_value (@subfield_values) {
+				if (! exists $ret_hr->{$subfield_value}) {
+					$ret_hr->{$subfield_value} = $subfield_value;
+				}
 			}
 		}
 		$num++;
