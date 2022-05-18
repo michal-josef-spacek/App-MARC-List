@@ -1,16 +1,11 @@
 NAME
-    marc-list - Script to fetch module from CPAN archive.
+    marc-list - Script to get MARC field/subfield unique list.
 
 SYNOPSIS
-     marc-list [-h] [--version] module_name[module_version]
+     marc-list [-h] [--version] marc_xml_file field subfield
 
 DESCRIPTION
-    Vision of this module is:
-
-     * intuitive name for script which fetching module from CPAN
-     * intuitive caching mechanism (switch for source)
-     * simple dependencies to modules, which doing one thing (not CPAN module) SIC!
-     * testable and tested distribution
+    It supports MARC XML files now.
 
 ARGUMENTS
     *       "-h"
@@ -21,29 +16,22 @@ ARGUMENTS
 
              Print version of script.
 
-    *       "module_name"
+    *       "marc_xml_file"
 
-             Perl module name.
-             e.g. App::Pod::Example
+            MARC XML file name.
+
+    *       "field"
+
+            MARC field.
+
+    *       "subfield"
+
+            MARC subfield.
 
     *       "module_version"
 
-            Perl module version. There are some posibilities how to define:
-
-             @module_version (e.g. @1.23)
-             - Define exact module version.
-
-             ~module_version (e.g. ~1.23)
-             - Define version and later.
-
-             ~"== module_version" (e.g. ~"== 1.23")
-             - Define exact module version.
-
-             ~">= module_version_min, < module_version_max" (e.g. ~">= 1.23, < 2.00")
-             - Define limit. (e.g. last version in 1.xx branch)
-
 EXAMPLE
-     marc-xml2json __MARC.xml__
+     marc-list __MARC.xml__ 015 a
 
 REPOSITORY
     <https://github.com/michal-josef-spacek/App-MARC-List>
