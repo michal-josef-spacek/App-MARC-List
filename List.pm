@@ -92,8 +92,10 @@ sub run {
 	}
 
 	# Print out.
-	print join "\n", map { encode_utf8($_) } uniq sort keys %{$ret_hr};
-	print "\n";
+	if (%{$ret_hr}) {
+		print join "\n", map { encode_utf8($_) } uniq sort keys %{$ret_hr};
+		print "\n";
+	}
 	
 	return 0;
 }
