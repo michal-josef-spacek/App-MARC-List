@@ -20,8 +20,12 @@ perl_version 5.006;
 readme_from 'bin/marc-list';
 recursive_author_tests('xt');
 requires 'Class::Utils' => 0;
+requires 'English' => 0;
 requires 'Error::Pure' => 0;
 requires 'Getopt::Std' => 0;
+requires 'List::MoreUtils' => 0;
+requires 'MARC::File::XML' => '1.0.4';
+requires 'Unicode::UTF8' => 0;
 resources 'bugtracker' => 'https://github.com/michal-josef-spacek/App-MARC-List/issues',
 resources 'homepage' => 'https://github.com/michal-josef-spacek/App-MARC-List';
 resources 'repository' => 'git://github.com/michal-josef-spacek/App-MARC-List';
