@@ -5,7 +5,6 @@ use App::MARC::List;
 use English;
 use File::Object;
 use File::Spec::Functions qw(abs2rel);
-use Perl6::Slurp qw(slurp);
 use Test::More 'tests' => 4;
 use Test::NoWarnings;
 use Test::Output;
