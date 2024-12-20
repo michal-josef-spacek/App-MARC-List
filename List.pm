@@ -149,6 +149,8 @@ Returns 1 for error, 0 for success.
 
 =head1 EXAMPLE
 
+=for comment filename=list_cnb_ids_from_example_marc.pl
+
  use strict;
  use warnings;
 
