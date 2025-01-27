@@ -28,7 +28,7 @@ marc-list - Script to get MARC field/subfield unique list.
 
 =head1 SYNOPSIS
 
- marc-list [-h] [--version] marc_xml_file field subfield
+ marc-list [-h] [--version] marc_xml_file field [subfield]
 
 =head1 DESCRIPTION
 
@@ -58,11 +58,18 @@ MARC field.
 
 MARC subfield.
 
+It's optional. Not needed for control fields.
+Required for data fields.
+
 =item * C<module_version>
 
 =back
 
-=head1 EXAMPLE
+=head1 EXAMPLE1
+
+ marc-list __MARC.xml__ 008
+
+=head1 EXAMPLE2
 
  marc-list __MARC.xml__ 015 a
 
