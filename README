@@ -10,11 +10,11 @@ DESCRIPTION
 ARGUMENTS
     *       "-h"
 
-             Print help.
+            Print help.
 
     *       "--version"
 
-             Print version of script.
+            Print version of script.
 
     *       "marc_xml_file"
 

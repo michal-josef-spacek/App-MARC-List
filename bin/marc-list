@@ -40,11 +40,11 @@ It supports MARC XML files now.
 
 =item * C<-h>
 
- Print help.
+Print help.
 
 =item * C<--version>
 
- Print version of script.
+Print version of script.
 
 =item * C<marc_xml_file>
 
