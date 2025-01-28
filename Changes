@@ -1,6 +1,7 @@
 0.05
  - Add -f option to print frequency.
  - Improve doc in marc-list.
+ - Remove pointless uniq from code.
 
 0.04 2025-01-27T21:12:34+01:00
  - Add support for control fields.

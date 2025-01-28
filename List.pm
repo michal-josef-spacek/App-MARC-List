@@ -103,7 +103,7 @@ sub run {
 			print join "\n", reverse sort map { encode_utf8($ret_hr->{$_}.' '.$_) }
 				keys %{$ret_hr};
 		} else {
-			print join "\n", map { encode_utf8($_) } uniq sort keys %{$ret_hr};
+			print join "\n", map { encode_utf8($_) } sort keys %{$ret_hr};
 		}
 		print "\n";
 	}
