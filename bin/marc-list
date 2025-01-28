@@ -28,7 +28,7 @@ marc-list - Script to get MARC field/subfield unique list.
 
 =head1 SYNOPSIS
 
- marc-list [-h] [--version] marc_xml_file field [subfield]
+ marc-list [-f] [-h] [--version] marc_xml_file field [subfield]
 
 =head1 DESCRIPTION
 
@@ -37,6 +37,10 @@ It supports MARC XML files now.
 =head1 ARGUMENTS
 
 =over 8
+
+=item * C<-f>
+
+Print frequency.
 
 =item * C<-h>
 

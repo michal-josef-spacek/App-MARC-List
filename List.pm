@@ -33,13 +33,15 @@ sub run {
 
 	# Process arguments.
 	$self->{'_opts'} = {
+		'f' => 0,
 		'h' => 0,
 	};
-	if (! getopts('h', $self->{'_opts'})
+	if (! getopts('fh', $self->{'_opts'})
 		|| $self->{'_opts'}->{'h'}
 		|| @ARGV < 2) {
 
-		print STDERR "Usage: $0 [-h] [--version] marc_xml_file field [subfield]\n";
+		print STDERR "Usage: $0 [-f] [-h] [--version] marc_xml_file field [subfield]\n";
+		print STDERR "\t-f\t\tPrint frequency.\n";
 		print STDERR "\t-h\t\tPrint help.\n";
 		print STDERR "\t--version\tPrint version.\n";
 		print STDERR "\tmarc_xml_file\tMARC XML file.\n";
@@ -85,13 +87,11 @@ sub run {
 			if (defined $self->{'_marc_subfield'}) {
 				my @subfield_values = $field->subfield($self->{'_marc_subfield'});
 				foreach my $subfield_value (@subfield_values) {
-					if (! exists $ret_hr->{$subfield_value}) {
-						$ret_hr->{$subfield_value} = $subfield_value;
-					}
+					$ret_hr->{$subfield_value}++;
 				}
 			} else {
 				my $data = $field->data;
-				$ret_hr->{$data} = $data;
+				$ret_hr->{$data}++;
 			}
 		}
 		$num++;
@@ -99,7 +99,12 @@ sub run {
 
 	# Print out.
 	if (%{$ret_hr}) {
-		print join "\n", map { encode_utf8($_) } uniq sort keys %{$ret_hr};
+		if ($self->{'_opts'}->{'f'}) {
+			print join "\n", reverse sort map { encode_utf8($ret_hr->{$_}.' '.$_) }
+				keys %{$ret_hr};
+		} else {
+			print join "\n", map { encode_utf8($_) } uniq sort keys %{$ret_hr};
+		}
 		print "\n";
 	}
 	

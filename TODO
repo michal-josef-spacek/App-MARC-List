@@ -3,7 +3,6 @@ TODO
 3. Support multiple params. marc-list 490 a 490 b
 4. Fix message of issue with MARC record.
 5. Add support for leader.
-6. Add freq to output structure. Add option to sort via freq.
 7.
 
 Applied
@@ -14,3 +13,6 @@ NONE [20220518] skim
 1. First version.
 Support XML file of MARC
 OK [20220518] skim
+
+6. Add freq to output structure. Add option to sort via freq.
+OK [20250128] skim

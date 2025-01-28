@@ -6,7 +6,7 @@ use English;
 use Error::Pure::Utils qw(clean);
 use File::Object;
 use File::Spec::Functions qw(abs2rel);
-use Test::More 'tests' => 10;
+use Test::More 'tests' => 12;
 use Test::NoWarnings;
 use Test::Output;
 use Test::Warn;
@@ -105,6 +105,46 @@ stdout_is(
 
 # Test.
 @ARGV = (
+	'-f',
+	$data_dir->file('ex1.xml')->s,
+	'015',
+	'a',
+);
+$right_ret = <<'END';
+1 cnb000000096
+END
+stdout_is(
+	sub {
+		App::MARC::List->new->run;
+		return;
+	},
+	$right_ret,
+	'Run list for MARC XML file with 1 record (015a = cnb000000096, with frequency).',
+);
+
+# Test.
+@ARGV = (
+	'-f',
+	$data_dir->file('ex3.xml')->s,
+	'260',
+	'b',
+);
+$right_ret = <<'END';
+2 SPN,
+1 ÚVTEI,
+1 Ministerstvo vnitra ČSSR,
+END
+stdout_is(
+	sub {
+		App::MARC::List->new->run;
+		return;
+	},
+	$right_ret,
+	'Run list for MARC XML file with 1 record (260b, with frequency).',
+);
+
+# Test.
+@ARGV = (
 	$data_dir->file('ex2.xml')->s,
 	'015',
 	'a',
@@ -136,7 +176,8 @@ sub help {
 		$script =~ s/\\/\//msg;
 	}
 	my $help = <<"END";
-Usage: $script [-h] [--version] marc_xml_file field [subfield]
+Usage: $script [-f] [-h] [--version] marc_xml_file field [subfield]
+	-f		Print frequency.
 	-h		Print help.
 	--version	Print version.
 	marc_xml_file	MARC XML file.
