@@ -1,5 +1,6 @@
 0.05
  - Add -f option to print frequency.
+ - Add support for leader.
  - Improve doc in marc-list.
  - Remove pointless uniq from code.
 

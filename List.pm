@@ -45,7 +45,7 @@ sub run {
 		print STDERR "\t-h\t\tPrint help.\n";
 		print STDERR "\t--version\tPrint version.\n";
 		print STDERR "\tmarc_xml_file\tMARC XML file.\n";
-		print STDERR "\tfield\t\tMARC field.\n";
+		print STDERR "\tfield\t\tMARC field (field number or 'leader' string).\n";
 		print STDERR "\tsubfield\tMARC subfield (for datafields).\n";
 		return 1;
 	}
@@ -53,7 +53,8 @@ sub run {
 	$self->{'_marc_field'} = shift @ARGV;
 	$self->{'_marc_subfield'} = shift @ARGV;
 
-	if (int($self->{'_marc_field'}) > 9
+	if ($self->{'_marc_field'} ne 'leader'
+		&& int($self->{'_marc_field'}) > 9
 		&& ! defined $self->{'_marc_subfield'}) {
 
 		err 'Subfield is required.';
@@ -82,16 +83,21 @@ sub run {
 		}
 		$previous_record = $record;
 
-		my @fields = $record->field($self->{'_marc_field'});
-		foreach my $field (@fields) {
-			if (defined $self->{'_marc_subfield'}) {
-				my @subfield_values = $field->subfield($self->{'_marc_subfield'});
-				foreach my $subfield_value (@subfield_values) {
-					$ret_hr->{$subfield_value}++;
+		if ($self->{'_marc_field'} eq 'leader') {
+			my $leader = $record->leader;
+			$ret_hr->{"'".$leader."'"}++;
+		} else {
+			my @fields = $record->field($self->{'_marc_field'});
+			foreach my $field (@fields) {
+				if (defined $self->{'_marc_subfield'}) {
+					my @subfield_values = $field->subfield($self->{'_marc_subfield'});
+					foreach my $subfield_value (@subfield_values) {
+						$ret_hr->{$subfield_value}++;
+					}
+				} else {
+					my $data = $field->data;
+					$ret_hr->{$data}++;
 				}
-			} else {
-				my $data = $field->data;
-				$ret_hr->{$data}++;
 			}
 		}
 		$num++;

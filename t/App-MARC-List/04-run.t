@@ -6,7 +6,7 @@ use English;
 use Error::Pure::Utils qw(clean);
 use File::Object;
 use File::Spec::Functions qw(abs2rel);
-use Test::More 'tests' => 12;
+use Test::More 'tests' => 13;
 use Test::NoWarnings;
 use Test::Output;
 use Test::Warn;
@@ -145,6 +145,23 @@ stdout_is(
 
 # Test.
 @ARGV = (
+	$data_dir->file('ex3.xml')->s,
+	'leader',
+);
+$right_ret = <<'END';
+'     nam a22        4500'
+END
+stdout_is(
+	sub {
+		App::MARC::List->new->run;
+		return;
+	},
+	$right_ret,
+	'Run list for MARC XML file with 1 record (260b, with frequency).',
+);
+
+# Test.
+@ARGV = (
 	$data_dir->file('ex2.xml')->s,
 	'015',
 	'a',
@@ -181,7 +198,7 @@ Usage: $script [-f] [-h] [--version] marc_xml_file field [subfield]
 	-h		Print help.
 	--version	Print version.
 	marc_xml_file	MARC XML file.
-	field		MARC field.
+	field		MARC field (field number or 'leader' string).
 	subfield	MARC subfield (for datafields).
 END
 
