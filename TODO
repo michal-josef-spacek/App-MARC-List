@@ -2,7 +2,6 @@ TODO
 ====
 3. Support multiple params. marc-list 490 a 490 b
 4. Fix message of issue with MARC record.
-7. Add check for input field (field or leader string).
 8.
 
 Applied
@@ -19,3 +18,6 @@ OK [20250128] skim
 
 5. Add support for leader.
 OK [20250128] skim
+
+7. Add check for input field (field or leader string).
+OK [20250129] skim

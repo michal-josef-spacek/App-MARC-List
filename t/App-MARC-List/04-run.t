@@ -6,7 +6,7 @@ use English;
 use Error::Pure::Utils qw(clean);
 use File::Object;
 use File::Spec::Functions qw(abs2rel);
-use Test::More 'tests' => 13;
+use Test::More 'tests' => 14;
 use Test::NoWarnings;
 use Test::Output;
 use Test::Warn;
@@ -174,6 +174,18 @@ stderr_like(
 	qr{^Cannot process '1' record\. Error: Field 300 must have indicators \(use ' ' for empty indicators\)},
 	'Run filter for MARC XML file with 1 record (with error).',
 );
+
+# Test.
+@ARGV = (
+	$data_dir->file('ex2.xml')->s,
+	'bad',
+);
+eval {
+	App::MARC::List->new->run;
+};
+is($EVAL_ERROR, "Bad field definition. Must be a 'leader' or numeric value of the field.\n",
+	'Run filter for MARC XML file with bad arguments (bad).');
+clean();
 
 # Test.
 @ARGV = (

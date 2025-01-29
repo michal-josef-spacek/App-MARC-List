@@ -54,6 +54,12 @@ sub run {
 	$self->{'_marc_subfield'} = shift @ARGV;
 
 	if ($self->{'_marc_field'} ne 'leader'
+		&& $self->{'_marc_field'} !~ m/^\d+$/ms) {
+
+		err "Bad field definition. Must be a 'leader' or numeric value of the field.";
+	}
+
+	if ($self->{'_marc_field'} ne 'leader'
 		&& int($self->{'_marc_field'}) > 9
 		&& ! defined $self->{'_marc_subfield'}) {
 
@@ -162,6 +168,7 @@ Returns 1 for error, 0 for success.
                  Unknown parameter '%s'.
 
  run():
+         Bad field definition. Must be a 'leader' or numeric value of the field.
          Subfield is required.
 
 =head1 EXAMPLE
