@@ -3,7 +3,9 @@ TODO
 3. Support multiple params. marc-list 490 a 490 b
 4. Fix message of issue with MARC record.
 8. Describe error processing in tool doc.
-9.
+9. Add example for leader to doc.
+10. Add example for field 008 to doc.
+11.
 
 Applied
 =======
