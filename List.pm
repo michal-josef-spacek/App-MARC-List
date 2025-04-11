@@ -112,7 +112,13 @@ sub run {
 	# Print out.
 	if (%{$ret_hr}) {
 		if ($self->{'_opts'}->{'f'}) {
-			print join "\n", reverse sort map { encode_utf8($ret_hr->{$_}.' '.$_) }
+			print join "\n",
+				map { $ret_hr->{$_}.' '.encode_utf8($_) }
+				reverse sort {
+					$ret_hr->{$a} <=> $ret_hr->{$b}
+					||
+					$a cmp $b
+				}
 				keys %{$ret_hr};
 		} else {
 			print join "\n", map { encode_utf8($_) } sort keys %{$ret_hr};

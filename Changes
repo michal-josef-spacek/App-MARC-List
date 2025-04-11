@@ -1,4 +1,5 @@
 0.06
+ - Fix sort of frequency.
 
 0.05 2025-01-30T14:05:45+01:00
  - Add -f option to print frequency.
