@@ -8,6 +8,7 @@ use English;
 use Error::Pure qw(err);
 use Getopt::Std;
 use List::MoreUtils qw(uniq);
+use List::Util qw(max);
 use MARC::File::XML (BinaryEncoding => 'utf8', RecordFormat => 'MARC21');
 use Unicode::UTF8 qw(decode_utf8 encode_utf8);
 
@@ -112,8 +113,10 @@ sub run {
 	# Print out.
 	if (%{$ret_hr}) {
 		if ($self->{'_opts'}->{'f'}) {
+			my $max = max(values %{$ret_hr});
+			my $num = length($max);
 			print join "\n",
-				map { $ret_hr->{$_}.' '.encode_utf8($_) }
+				map { sprintf("%${num}s", $ret_hr->{$_}).' '.encode_utf8($_) }
 				reverse sort {
 					$ret_hr->{$a} <=> $ret_hr->{$b}
 					||
