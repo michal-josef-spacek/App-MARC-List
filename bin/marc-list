@@ -58,11 +58,13 @@ MARC XML file name.
 
 MARC field.
 
+Field number or 'leader' string.
+
 =item * C<subfield>
 
 MARC subfield.
 
-It's optional. Not needed for control fields.
+It's optional. Not needed for control fields or leader.
 Required for data fields.
 
 =item * C<module_version>

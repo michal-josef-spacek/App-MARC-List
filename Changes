@@ -1,4 +1,5 @@
 0.06
+ - Fix doc with leader support.
  - Fix sort of frequency.
  - Improve placing of frequency.
 
