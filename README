@@ -44,9 +44,12 @@ ARGUMENTS
     *       "module_version"
 
 EXAMPLE1
-     marc-list __MARC.xml__ 008
+     marc-lisr __MARC.xml__ leader
 
 EXAMPLE2
+     marc-list __MARC.xml__ 008
+
+EXAMPLE3
      marc-list __MARC.xml__ 015 a
 
 REPOSITORY

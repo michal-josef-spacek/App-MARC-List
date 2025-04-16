@@ -77,9 +77,13 @@ Required for data fields.
 
 =head1 EXAMPLE1
 
- marc-list __MARC.xml__ 008
+ marc-lisr __MARC.xml__ leader
 
 =head1 EXAMPLE2
+
+ marc-list __MARC.xml__ 008
+
+=head1 EXAMPLE3
 
  marc-list __MARC.xml__ 015 a
 
