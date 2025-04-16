@@ -1,5 +1,5 @@
 ---
-abstract: 'Tool to get MARC leader of field/subfield unique list.'
+abstract: 'Tool to get MARC leader or field/subfield unique list.'
 author:
   - 'Michal Josef Spacek <skim@cpan.org>'
 build_requires:
