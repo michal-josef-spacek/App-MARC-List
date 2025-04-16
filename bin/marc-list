@@ -24,7 +24,7 @@ __END__
 
 =head1 NAME
 
-marc-list - Script to get MARC field/subfield unique list.
+marc-list - Tool to get MARC leader of field/subfield unique list.
 
 =head1 SYNOPSIS
 
