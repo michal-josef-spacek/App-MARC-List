@@ -5,6 +5,10 @@ SYNOPSIS
      marc-list [-f] [-h] [--version] marc_xml_file field [subfield]
 
 DESCRIPTION
+    Tool to fetch unique list of some field in MARC collection file. It
+    could filter leader, control and data fields. There is possibility to
+    add frequency for each item in list.
+
     It supports MARC XML files now.
 
 ARGUMENTS

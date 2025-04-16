@@ -32,6 +32,10 @@ marc-list - Tool to get MARC leader of field/subfield unique list.
 
 =head1 DESCRIPTION
 
+Tool to fetch unique list of some field in MARC collection file.
+It could filter leader, control and data fields.
+There is possibility to add frequency for each item in list.
+
 It supports MARC XML files now.
 
 =head1 ARGUMENTS
