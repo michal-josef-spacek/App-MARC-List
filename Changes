@@ -1,6 +1,7 @@
 0.08
  - Fix minimal version of Test::Warn to 0.31.
  - Fix typo in abstract.
+ - Update copyright years.
 
 0.07 2025-04-16T13:09:02+02:00
  - Add DESCRIPTION to doc.
