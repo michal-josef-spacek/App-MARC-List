@@ -6,7 +6,7 @@ use English;
 use Error::Pure::Utils qw(clean);
 use File::Object;
 use File::Spec::Functions qw(abs2rel);
-use Test::More 'tests' => 14;
+use Test::More 'tests' => 15;
 use Test::NoWarnings;
 use Test::Output;
 use Test::Warn 0.31;
@@ -185,6 +185,19 @@ eval {
 };
 is($EVAL_ERROR, "Bad field definition. Must be a 'leader' or numeric value of the field.\n",
 	'Run filter for MARC XML file with bad arguments (bad).');
+clean();
+
+# Test.
+@ARGV = (
+	'file_not_exists',
+	'015',
+	'a',
+);
+eval {
+	App::MARC::List->new->run;
+};
+is($EVAL_ERROR, "File 'file_not_exists' doesn't exist.\n",
+	"File 'file_not_exists' doesn't exist.");
 clean();
 
 # Test.

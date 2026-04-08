@@ -67,6 +67,9 @@ sub run {
 		err 'Subfield is required.';
 	}
 
+	if (! -r $self->{'_marc_xml_file'}) {
+		err "File '$self->{'_marc_xml_file'}' doesn't exist.";
+	}
 	my $marc_file = MARC::File::XML->in($self->{'_marc_xml_file'});
 	my $ret_hr = {};
 	my $num = 1;
@@ -178,6 +181,7 @@ Returns 1 for error, 0 for success.
 
  run():
          Bad field definition. Must be a 'leader' or numeric value of the field.
+         File '%s' doesn't exist.
          Subfield is required.
 
 =head1 EXAMPLE
