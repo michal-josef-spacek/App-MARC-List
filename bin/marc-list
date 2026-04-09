@@ -5,7 +5,7 @@ use warnings;
 
 use App::MARC::List;
 
-our $VERSION = 0.08;
+our $VERSION = 0.09;
 
 # Run.
 exit App::MARC::List->new->run;
@@ -105,6 +105,6 @@ BSD 2-Clause License
 
 =head1 VERSION
 
-0.08
+0.09
 
 =cut
