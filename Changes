@@ -1,6 +1,7 @@
 0.08
  - Add check for input file.
  - Fix minimal version of Test::Warn to 0.31.
+ - Fix sort in freq.
  - Fix typo in abstract.
  - Update copyright years.
 

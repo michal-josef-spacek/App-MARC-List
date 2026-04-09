@@ -123,7 +123,7 @@ sub run {
 				reverse sort {
 					$ret_hr->{$a} <=> $ret_hr->{$b}
 					||
-					$a cmp $b
+					$b cmp $a
 				}
 				keys %{$ret_hr};
 		} else {

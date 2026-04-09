@@ -131,8 +131,8 @@ stdout_is(
 );
 $right_ret = <<'END';
 2 SPN,
-1 ÚVTEI,
 1 Ministerstvo vnitra ČSSR,
+1 ÚVTEI,
 END
 stdout_is(
 	sub {
