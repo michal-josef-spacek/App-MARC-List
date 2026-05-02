@@ -222,7 +222,7 @@ Usage: $script [-f] [-h] [-s] [--version] marc_xml_file field [subfield]
 	-h		Print help.
 	-s		Skip controls of field/subfield.
 	--version	Print version.
-	marc_xml_file	MARC XML file.
+	marc_xml_file	MARC XML file, could be compressed.
 	field		MARC field (field number or 'leader' string).
 	subfield	MARC subfield (for datafields).
 END

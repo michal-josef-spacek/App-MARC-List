@@ -62,6 +62,10 @@ Print version of script.
 
 MARC XML file name.
 
+Input file could be compressed by L<IO::Uncompress::AnyUncompress> module.
+Possibility is to uncompress gzip, zip, bzip2, zstd, xz, lzma, lzip, lzf or
+lzop.
+
 =item * C<field>
 
 MARC field.

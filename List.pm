@@ -49,7 +49,7 @@ sub run {
 		print STDERR "\t-h\t\tPrint help.\n";
 		print STDERR "\t-s\t\tSkip controls of field/subfield.\n";
 		print STDERR "\t--version\tPrint version.\n";
-		print STDERR "\tmarc_xml_file\tMARC XML file.\n";
+		print STDERR "\tmarc_xml_file\tMARC XML file, could be compressed.\n";
 		print STDERR "\tfield\t\tMARC field (field number or 'leader' string).\n";
 		print STDERR "\tsubfield\tMARC subfield (for datafields).\n";
 		return 1;
