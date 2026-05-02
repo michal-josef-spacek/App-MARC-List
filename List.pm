@@ -385,6 +385,7 @@ L<Error::Pure>,
 L<Getopt::Std>,
 L<IO::Uncompress::AnyUncompress>,
 L<List::MoreUtils>,
+L<List::Util>,
 L<MARC::Batch>,
 L<MARC::File::XML>,
 L<Unicode::UTF8>.

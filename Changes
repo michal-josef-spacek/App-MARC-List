@@ -1,6 +1,7 @@
 0.09
  - Add -s option to skip check of field/subfield.
  - Add support for compressed input file.
+ - Fix DEPENDENCIES section in doc.
  - Fix typo in doc.
  - Remove XXX from tests.
  - Simplify variables.
