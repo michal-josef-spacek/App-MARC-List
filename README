@@ -2,7 +2,7 @@ NAME
     marc-list - Tool to get MARC leader or field/subfield unique list.
 
 SYNOPSIS
-     marc-list [-f] [-h] [--version] marc_xml_file field [subfield]
+     marc-list [-f] [-h] [-s] [--version] marc_xml_file field [subfield]
 
 DESCRIPTION
     Tool to fetch unique list of some field in MARC collection file. It
@@ -19,6 +19,10 @@ ARGUMENTS
     *       "-h"
 
             Print help.
+
+    *       "-s"
+
+            Skip controls of field/subfield.
 
     *       "--version"
 

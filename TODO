@@ -5,7 +5,9 @@ TODO
 8. Describe error processing in tool doc.
 9. Add example for leader to doc.
 10. Add example for field 008 to doc.
-11.
+11. Add real example for -s option.
+12. Add tests for -s option.
+13.
 
 Applied
 =======

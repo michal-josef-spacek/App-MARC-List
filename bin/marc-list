@@ -28,7 +28,7 @@ marc-list - Tool to get MARC leader or field/subfield unique list.
 
 =head1 SYNOPSIS
 
- marc-list [-f] [-h] [--version] marc_xml_file field [subfield]
+ marc-list [-f] [-h] [-s] [--version] marc_xml_file field [subfield]
 
 =head1 DESCRIPTION
 
@@ -49,6 +49,10 @@ Print frequency.
 =item * C<-h>
 
 Print help.
+
+=item * C<-s>
+
+Skip controls of field/subfield.
 
 =item * C<--version>
 

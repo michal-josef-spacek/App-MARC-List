@@ -36,14 +36,16 @@ sub run {
 	$self->{'_opts'} = {
 		'f' => 0,
 		'h' => 0,
+		's' => 0,
 	};
-	if (! getopts('fh', $self->{'_opts'})
+	if (! getopts('fhs', $self->{'_opts'})
 		|| $self->{'_opts'}->{'h'}
 		|| @ARGV < 2) {
 
-		print STDERR "Usage: $0 [-f] [-h] [--version] marc_xml_file field [subfield]\n";
+		print STDERR "Usage: $0 [-f] [-h] [-s] [--version] marc_xml_file field [subfield]\n";
 		print STDERR "\t-f\t\tPrint frequency.\n";
 		print STDERR "\t-h\t\tPrint help.\n";
+		print STDERR "\t-s\t\tSkip controls of field/subfield.\n";
 		print STDERR "\t--version\tPrint version.\n";
 		print STDERR "\tmarc_xml_file\tMARC XML file.\n";
 		print STDERR "\tfield\t\tMARC field (field number or 'leader' string).\n";
@@ -54,17 +56,19 @@ sub run {
 	$self->{'_marc_field'} = shift @ARGV;
 	$self->{'_marc_subfield'} = shift @ARGV;
 
-	if ($self->{'_marc_field'} ne 'leader'
-		&& $self->{'_marc_field'} !~ m/^\d+$/ms) {
+	if (! $self->{'_opts'}->{'s'}) {
+		if ($self->{'_marc_field'} ne 'leader'
+			&& $self->{'_marc_field'} !~ m/^\d+$/ms) {
 
-		err "Bad field definition. Must be a 'leader' or numeric value of the field.";
-	}
+			err "Bad field definition. Must be a 'leader' or numeric value of the field.";
+		}
 
-	if ($self->{'_marc_field'} ne 'leader'
-		&& int($self->{'_marc_field'}) > 9
-		&& ! defined $self->{'_marc_subfield'}) {
+		if ($self->{'_marc_field'} ne 'leader'
+			&& int($self->{'_marc_field'}) > 9
+			&& ! defined $self->{'_marc_subfield'}) {
 
-		err 'Subfield is required.';
+			err 'Subfield is required.';
+		}
 	}
 
 	if (! -r $self->{'_marc_xml_file'}) {

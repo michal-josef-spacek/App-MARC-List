@@ -218,9 +218,10 @@ sub help {
 		$script =~ s/\\/\//msg;
 	}
 	my $help = <<"END";
-Usage: $script [-f] [-h] [--version] marc_xml_file field [subfield]
+Usage: $script [-f] [-h] [-s] [--version] marc_xml_file field [subfield]
 	-f		Print frequency.
 	-h		Print help.
+	-s		Skip controls of field/subfield.
 	--version	Print version.
 	marc_xml_file	MARC XML file.
 	field		MARC field (field number or 'leader' string).
