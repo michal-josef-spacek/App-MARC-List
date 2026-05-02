@@ -7,8 +7,10 @@ use Class::Utils qw(set_params);
 use English;
 use Error::Pure qw(err);
 use Getopt::Std;
+use IO::Uncompress::AnyUncompress qw($AnyUncompressError);
 use List::MoreUtils qw(uniq);
 use List::Util qw(max);
+use MARC::Batch;
 use MARC::File::XML (BinaryEncoding => 'utf8', RecordFormat => 'MARC21');
 use Unicode::UTF8 qw(decode_utf8 encode_utf8);
 
@@ -74,13 +76,28 @@ sub run {
 	if (! -r $marc_xml_file) {
 		err "File '$marc_xml_file' doesn't exist.";
 	}
-	my $marc_file = MARC::File::XML->in($marc_xml_file);
+	my ($fh, $errno);
+	if ($self->_open_marc_input($marc_xml_file, \$fh, \$errno)) {
+		print STDERR "Cannot open file '$marc_xml_file'.";
+		if (defined $errno) {
+			print STDERR "\tErrno: $errno\n";
+		}
+		return 1;
+	}
+	my $marc_batch = eval {
+		MARC::Batch->new('XML', $fh);
+	};
+	if ($EVAL_ERROR) {
+		print STDERR "Cannot open MARC XML stream.\n";
+		print STDERR "\tError: $EVAL_ERROR\n";
+		return 1;
+	}
 	my $ret_hr = {};
 	my $num = 1;
 	my $previous_record;
 	while (1) {
 		my $record = eval {
-			$marc_file->next;
+			$marc_batch->next;
 		};
 		if ($EVAL_ERROR) {
 			print STDERR "Cannot process '$num' record. ".
@@ -137,6 +154,19 @@ sub run {
 	}
 	
 	return 0;
+}
+
+sub _open_marc_input {
+	my ($self, $path, $fh_sr, $errno_sr) = @_;
+
+	# Compression autodetection.
+	${$fh_sr} = IO::Uncompress::AnyUncompress->new($path);
+	if (defined ${$fh_sr}) {
+		return 0;
+	}
+	${$errno_sr} = $AnyUncompressError;
+
+	return 1;
 }
 
 1;
@@ -353,8 +383,10 @@ L<Class::Utils>,
 L<English>,
 L<Error::Pure>,
 L<Getopt::Std>,
-L<List::MoreUtils>
-L<MARC::File::XML>
+L<IO::Uncompress::AnyUncompress>,
+L<List::MoreUtils>,
+L<MARC::Batch>,
+L<MARC::File::XML>,
 L<Unicode::UTF8>.
 
 =head1 REPOSITORY
