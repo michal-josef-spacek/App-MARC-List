@@ -52,29 +52,29 @@ sub run {
 		print STDERR "\tsubfield\tMARC subfield (for datafields).\n";
 		return 1;
 	}
-	$self->{'_marc_xml_file'} = shift @ARGV;
-	$self->{'_marc_field'} = shift @ARGV;
-	$self->{'_marc_subfield'} = shift @ARGV;
+	my $marc_xml_file = shift @ARGV;
+	my $marc_field = shift @ARGV;
+	my $marc_subfield = shift @ARGV;
 
 	if (! $self->{'_opts'}->{'s'}) {
-		if ($self->{'_marc_field'} ne 'leader'
-			&& $self->{'_marc_field'} !~ m/^\d+$/ms) {
+		if ($marc_field ne 'leader'
+			&& $marc_field !~ m/^\d+$/ms) {
 
 			err "Bad field definition. Must be a 'leader' or numeric value of the field.";
 		}
 
-		if ($self->{'_marc_field'} ne 'leader'
-			&& int($self->{'_marc_field'}) > 9
-			&& ! defined $self->{'_marc_subfield'}) {
+		if ($marc_field ne 'leader'
+			&& int($marc_field) > 9
+			&& ! defined $marc_subfield) {
 
 			err 'Subfield is required.';
 		}
 	}
 
-	if (! -r $self->{'_marc_xml_file'}) {
-		err "File '$self->{'_marc_xml_file'}' doesn't exist.";
+	if (! -r $marc_xml_file) {
+		err "File '$marc_xml_file' doesn't exist.";
 	}
-	my $marc_file = MARC::File::XML->in($self->{'_marc_xml_file'});
+	my $marc_file = MARC::File::XML->in($marc_xml_file);
 	my $ret_hr = {};
 	my $num = 1;
 	my $previous_record;
@@ -97,14 +97,14 @@ sub run {
 		}
 		$previous_record = $record;
 
-		if ($self->{'_marc_field'} eq 'leader') {
+		if ($marc_field eq 'leader') {
 			my $leader = $record->leader;
 			$ret_hr->{"'".$leader."'"}++;
 		} else {
-			my @fields = $record->field($self->{'_marc_field'});
+			my @fields = $record->field($marc_field);
 			foreach my $field (@fields) {
-				if (defined $self->{'_marc_subfield'}) {
-					my @subfield_values = $field->subfield($self->{'_marc_subfield'});
+				if (defined $marc_subfield) {
+					my @subfield_values = $field->subfield($marc_subfield);
 					foreach my $subfield_value (@subfield_values) {
 						$ret_hr->{$subfield_value}++;
 					}
