@@ -2,6 +2,7 @@
  - Add -s option to skip check of field/subfield.
  - Add support for compressed input file.
  - Fix typo in doc.
+ - Remove XXX from tests.
  - Simplify variables.
 
 0.08 2026-04-09T22:17:28+02:00
